@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Autofficina Quintano</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+:root {
+  --rosso: #d92f2f;
+  --verde: #3c7b3e;
+  --nero: #111;
+  --bianco: #fff;
+}
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    body {
+      background: var(--bianco);
+      color: var(--nero);
+    }
+    header {
+      background: var(--nero);
+      padding: 1rem 2rem;
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      animation: slideDown 1s ease-in-out;
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-100%); }
+      to { transform: translateY(0); }
+    }
+    h2 {
+      text-align: center;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      height: 40px;
+      margin-right: 10px;
+    }
+    .logo span {
+      color: var(--rosso);
+      font-size: 1.8rem;
+    }
+    nav a {
+      color: var(--bianco);
+      text-decoration: none;
+      margin: 0 1rem;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: var(--verde);
+    }
+    section {
+      padding: 100px 20px;
+      /*min-height: 100vh;*/
+      animation: fadeIn 1s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero {
+      background: linear-gradient(to right, var(--nero), var(--rosso));
+      color: var(--bianco);
+      text-align: center;
+      padding: 120px 20px;
+    }
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.2rem;
+    }
+    .fade-slide {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    .fade-slide.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background: #25d366;
+      color: white;
+      padding: 11px 15px;
+      border-radius: 50%;
+      font-size: 24px;
+      z-index: 1000;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      /*animation: bounce 2s infinite;*/
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    footer {
+      background: var(--nero);
+      color: var(--bianco);
+      padding: 2rem;
+      text-align: center;
+    }
+    .cookies {
+      background: rgba(0,0,0,0.9);
+      color: var(--bianco);
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      padding: 1rem;
+      text-align: center;
+      display: none;
+      z-index: 1001;
+    }
+    .cookies button {
+      margin-left: 10px;
+      background: var(--verde);
+      color: var(--bianco);
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+    }
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  max-height: 2048px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+
+.carousel-inner {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-inner img {
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+  display: block;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  border: none;
+  font-size: 2rem;
+  padding: 10px 15px;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+}
+
+.carousel-btn.left { left: 20px; }
+.carousel-btn.right { right: 20px; }
+
+.carousel-btn:hover {
+  background: rgba(0,0,0,0.8);
+}
+
+@media screen and (max-width: 768px) {
+  .carousel {
+    height: 50vh;
+  }
+
+  .carousel-inner img {
+    height: 50vh;
+  }
+}
+
+  .service-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .service-card {
+    width: 220px;
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .service-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .service-card p {
+    margin-top: 0.8rem;
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+ /* .fade-slide {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+  }
+
+  .fade-slide.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }*/
+    table {
+      width: 100%;
+      max-width: 600px;
+      margin: 1rem auto;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    table td, table th {
+      padding: 0.5rem 1rem;
+      border-bottom: 1px solid #ccc;
+    }
+    table th {
+      background-color: var(--verde);
+      color: white;
+    }
+    @media (max-width: 768px) {
+      nav a {
+        margin: 0 0.5rem;
+        font-size: 0.9rem;
+      }
+      .hero h2 {
+        font-size: 2rem;
+      }
+    }
+    .tech-specs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.spec-box {
+  background: #fff;
+  border: 2px solid var(--verde);
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: transform 0.3s;
+}
+
+.spec-box:hover {
+  transform: translateY(-5px);
+}
+
+.spec-box img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 0.8rem;
+}
+
+.spec-box h3 {
+  font-size: 1.2rem;
+  color: var(--rosso);
+  margin-bottom: 0.5rem;
+}
+
+.spec-box ul {
+  list-style: none;
+  padding-left: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.spec-box ul li::before {
+  content: \"✔️ \";
+  margin-right: 0.3rem;
+  color: var(--verde);
+}
+#contatti {
+  padding: 100px 20px;
+  background: #f5f5f5;
+}
+
+#servizi {
+  padding: 100px 20px;
+  background: #f5f5f5;
+}
+.contact-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3rem;
+  max-width: 800px;
+  margin: auto;
+  margin-top: 2rem;
+}
+
+.contact-item {
+  background: white;
+  border: 2px solid var(--verde);
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  width: 250px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.contact-item:hover {
+  transform: translateY(-8px);
+}
+
+.contact-item i {
+  font-size: 2rem;
+  color: var(--rosso);
+  margin-bottom: 1rem;
+  animation: pop 0.6s ease;
+}
+
+.contact-item p {
+  font-size: 1rem;
+  color: #333;
+}
+
+.contact-item a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#mappa {
+  padding: 60px 20px;
+}
+
+.map-container {
+  width: 100%;
+  max-width: 1000px;
+  height: 400px;
+  margin: 0 auto;
+  border: 4px solid var(--verde);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0,0,0,0.15);
+}
+
+@keyframes pop {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@media screen and (max-width: 600px) {
+  .contact-box {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="img/logo.png" alt="Logo Officina">
+      <!--span>Autofficina Quintano</span-->
+    </div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#chi-siamo">Chi Siamo</a>
+      <a href="#servizi">I Nostri Servizi</a>
+      <a href="#orari">Orari</a>
+      <a href="#contatti">Contatti</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <h2>Benvenuti nella nostra Officina</h2>
+    <p>Esperienza, professionalità e passione per i motori.</p><br><br><br>
+    <div class="carousel" id="carousel">
+      <div class="carousel-inner" id="carouselInner">
+        <img src="img/img1.jpg" alt="Lavorazione 1">
+        <img src="img/img2.jpg" alt="Lavorazione 2">
+        <img src="img/img3.jpg" alt="Lavorazione 3">
+        <img src="img/img4.jpg" alt="Lavorazione 4">
+        <img src="img/img5.jpg" alt="Lavorazione 5">
+        <img src="img/img11.jpg" alt="Lavorazione 6">
+        <img src="img/img10.jpg" alt="Lavorazione 7">
+        <img src="img/img12.jpg" alt="Lavorazione 8">
+        <img src="img/img13.jpg" alt="Lavorazione 9">
+        <img src="img/img14.jpg" alt="Lavorazione 10">
+        <img src="img/img15.jpg" alt="Lavorazione 11">
+        <img src="img/img16.jpg" alt="Lavorazione 12">
+      </div>
+      <button class="carousel-btn left" onclick="prevSlide()">&#10094;</button>
+      <button class="carousel-btn right" onclick="nextSlide()">&#10095;</button>
+    </div>
+  </section>
+
+
+  <section id="chi-siamo">
+    <h2>Chi Siamo</h2><br><br>
+    <p class="fade-slide" id="chiSiamoTesto" style="max-width: 800px; margin: auto; line-height: 1.8;">
+      Dal 1979, <b>Autofficina Quintano</b> è un punto di riferimento per chi cerca competenza, affidabilità e passione nel mondo della meccanica.<br>
+      Fondata con l’obiettivo di offrire un servizio preciso e onesto, l’officina è cresciuta nel tempo mantenendo sempre saldi i valori familiari e l’attenzione per ogni cliente.<br>
+      Specializzati nella manutenzione e riparazione <b>multi marche</b>, ci prendiamo cura di ogni veicolo come se fosse il nostro, unendo esperienza artigianale e tecnologie moderne.<br>
+      Con oltre quarant’anni di attività, continuiamo a lavorare con impegno e dedizione per garantire sicurezza, efficienza e qualità su ogni strada.
+    </p>
+  </section>
+
+  <section id="servizi">
+    <h2>I Nostri Servizi</h2>
+    <div class="tech-specs">
+      <div class="spec-box fade-slide">
+        <img src="img/img6.jpg" alt="Tagliando completo">
+        <h3>Tagliandi completi</h3>
+        <ul>
+          <li>Controllo olio e filtri</li>
+          <li>Verifica livelli e liquidi</li>
+          <li>Controllo freni e pneumatici</li>
+          <li>Reset service</li>
+        </ul>
+      </div>
+      <div class="spec-box fade-slide">
+        <img src="img/img8.jpg" alt="Sistemi ABS/ESP">
+        <h3>Diagnosi ABS/ESP</h3>
+        <ul>
+          <li>Lettura codici guasto OBD</li>
+          <li>Riparazione sensori e moduli</li>
+          <li>Collaudo e taratura</li>
+          <li>Integrazione centraline</li>
+        </ul>
+      </div>
+      <div class="spec-box fade-slide">
+        <img src="img/img9.jpg" alt="Rigenerazione elettronica">
+        <h3>Rigenerazione elettronica</h3>
+        <ul>
+          <li>Centraline motore e cambio</li>
+          <li>Pompe e iniettori elettronici</li>
+          <li>Test e mappatura</li>
+          <li>Codifica ECU</li>
+        </ul>
+      </div>
+      <div class="spec-box fade-slide">
+        <img src="img/img7.jpg" alt="Sospensioni">
+        <h3>Sospensioni</h3>
+        <ul>
+          <li>Sostituzione ammortizzatori</li>
+          <li>Assetto e convergenza</li>
+          <li>Barre stabilizzatrici</li>
+          <li>Silent block</li>
+        </ul>
+      </div>
+      <div class="spec-box fade-slide">
+        <img src="img/img12.jpg" alt="Multimarche">
+        <h3>Servizio Multimarche</h3>
+        <ul>
+          <li>Auto italiane, tedesche, francesi</li>
+          <li>Compatibilità con standard casa madre</li>
+          <li>Ricambi certificati</li>
+          <li>Garanzia su interventi</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="orari">
+    <h2>Orari di Apertura</h2>
+    <p id="shopStatus" style="text-align:center;font-weight:bold; margin-top:1rem;"></p>
+    <table>
+      <tr><th>Giorno</th><th>Mattina</th><th>Pomeriggio</th></tr>
+      <tr><td>Lunedì</td><td>08:30 – 13:00</td><td>15:30 – 19:00</td></tr>
+      <tr><td>Martedì</td><td>08:30 – 13:00</td><td>15:30 – 19:00</td></tr>
+      <tr><td>Mercoledì</td><td>08:30 – 13:00</td><td>15:30 – 19:00</td></tr>
+      <tr><td>Giovedì</td><td>08:30 – 13:00</td><td>15:30 – 19:00</td></tr>
+      <tr><td>Venerdì</td><td>08:30 – 13:00</td><td>15:30 – 19:00</td></tr>
+      <tr><td>Sabato</td><td>08:30 – 12:30</td><td>–</td></tr>
+      <tr><td>Domenica</td><td colspan="2">Chiuso</td></tr>
+    </table>
+  </section>
+
+<section id="contatti" class="fade-slide">
+  <h2>Contattaci</h2>
+  <div class="contact-box">
+    <div class="contact-item">
+      <i class="fas fa-phone-alt"></i>
+      <p><a href="tel:+393293216362">329 321 6362</a></p>
+    </div>
+    <div class="contact-item">
+      <i class="fas fa-envelope"></i>
+      <p><a href="mailto:p.quintano86@gmail.com">p.quintano86@gmail.com</a></p>
+    </div>
+  </div>
+  <section id="mappa" class="fade-slide">
+  <h2>Dove Siamo</h2><br><br>
+  <div class="map-container">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3149.850735429583!2d16.571294915317525!3d40.68631827933571!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13477fa5afa97abd%3A0xa93103692bc4edb8!2sContrada%20Pedale%20della%20Madonna%2C%2075100%20Matera%20MT!5e0!3m2!1sit!2sit!4v1720621234567!5m2!1sit!2sit"
+      width="100%"
+      height="100%"
+      style="border:0;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+</section>
+
+</section>
+
+
+  <footer>
+    <p>&copy; 2025 Autofficina Quintano. Tutti i diritti riservati.</p>
+  </footer>
+
+  <div class="cookies" id="cookieBanner">
+    Questo sito utilizza cookie per migliorare l'esperienza utente.
+    <button onclick="acceptCookies()">Accetta</button>
+  </div>
+
+  <a class="whatsapp-btn" href="https://wa.me/3293216362" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script>
+    // Mostra cookies se non accettati
+    window.onload = function () {
+      if (!localStorage.getItem("cookiesAccepted")) {
+        document.getElementById("cookieBanner").style.display = "block";
+      }
+
+      // Osserva tutti gli elementi con la classe .fade-slide
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {
+        threshold: 0.2
+      });
+
+      document.querySelectorAll('.fade-slide').forEach(el => observer.observe(el));
+    };
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.2 });
+
+document.querySelectorAll('.fade-slide').forEach(el => observer.observe(el));
+
+  let currentSlide = 0;
+  const carouselInner = document.getElementById('carouselInner');
+  const slides = carouselInner.children;
+  const totalSlides = slides.length;
+
+  function updateCarousel() {
+    carouselInner.style.transform = `translateX(-${currentSlide * 100}%)`;
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateCarousel();
+  }
+
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    updateCarousel();
+  }
+
+  // Avanzamento automatico ogni 5 secondi
+  setInterval(nextSlide, 5000);
+
+  // Aggiorna dimensioni correttamente al caricamento
+  window.addEventListener('load', updateCarousel);
+  window.addEventListener('resize', updateCarousel);
+
+    // Accetta i cookie
+    function acceptCookies() {
+      localStorage.setItem("cookiesAccepted", true);
+      document.getElementById("cookieBanner").style.display = "none";
+    }
+    /* ======== CALCOLO STATO APERTURA ======== */
+function calcStatus() {
+  const statusEl = document.getElementById('shopStatus');
+  if (!statusEl) return;
+
+  // Orari per ogni giorno (0=Dom, … 6=Sab) in minuti dal giorno
+  const timetable = {
+    1: [[8*60+30, 13*60], [15*60+30, 19*60]],   // Lunedì
+    2: [[8*60+30, 13*60], [15*60+30, 19*60]],   // Martedì
+    3: [[8*60+30, 13*60], [15*60+30, 19*60]],   // Mercoledì
+    4: [[8*60+30, 13*60], [15*60+30, 19*60]],   // Giovedì
+    5: [[8*60+30, 13*60], [15*60+30, 19*60]],   // Venerdì
+    6: [[8*60+30, 12*60+30]]                    // Sabato
+    // Domenica assente = chiuso
+  };
+
+  const now   = new Date();
+  const day   = now.getDay();              // 0–6
+  const mins  = now.getHours()*60 + now.getMinutes();
+
+  let isOpen = false, closesIn = null;
+
+  if (timetable[day]) {
+    timetable[day].forEach(([start, end]) => {
+      if (mins >= start && mins < end) {
+        isOpen = true;
+        closesIn = end - mins;             // minuti alla chiusura
+      }
+    });
+  }
+
+  // Aggiorna testo e colore
+  if (isOpen) {
+    if (closesIn <= 30) {
+      statusEl.textContent = 'Chiude tra poco';
+      statusEl.style.color = '#d9a92f';    // giallo scuro
+    } else {
+      statusEl.textContent = 'Aperto';
+      statusEl.style.color = '#3c7b3e';    // verde
+    }
+  } else {
+    statusEl.textContent = 'Chiuso';
+    statusEl.style.color = '#c00000';      // rosso
+  }
+}
+
+/* run subito e poi ogni minuto */
+window.addEventListener('load', calcStatus);
+setInterval(calcStatus, 60000);
+  </script>
+
+</body>
+</html>
